@@ -1,0 +1,28 @@
+{
+  "name": "task_management_api",
+  "version": "1.0.0",
+  "description": "A task management API using Node.js, Express, and MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon --exec babel-node src/server",
+    "build": "babel src -d build",
+    "start": "node build/server.js"
+  },
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.24.8",
+    "@babel/node": "^7.25.0",
+    "@babel/plugin-syntax-object-rest-spread": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.25.4",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/register": "^7.24.6",
+    "cor": "^0.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.4",
+    "nodemon": "^3.1.4"
+  }
+}
