@@ -24,6 +24,30 @@ class Db {
       throw error;
     }
   }
+  static async addProject(model, data) {
+    try {
+      const newProject = await model({ ...data });
+      return newProject.save();
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async getAllProjects(model) {
+    try {
+      const allProjects = await model.find({});
+      return allProjects;
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async getProjectById(model, id) {
+    try {
+      const project = await model.findById(id);
+      return project;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default Db;
