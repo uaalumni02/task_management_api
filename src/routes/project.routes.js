@@ -10,7 +10,7 @@ const router = express.Router();
 router
   .route("/")
   .post(projectController.addProject) 
-  .get(projectController.allProjects);
+  .get(checkAuth,projectController.allProjects);
 
 router.route("/:id").get(projectController.getProjectById);
 

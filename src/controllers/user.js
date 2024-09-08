@@ -36,7 +36,6 @@ class UserData {
         }
       }
     } catch (error) {
-      console.log(error);
       return Response.responseServerError(res);
     }
   }
