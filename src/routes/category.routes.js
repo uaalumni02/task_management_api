@@ -1,7 +1,7 @@
 import express from "express";
 import checkAuth from "../middleware/check-auth";
 
-import projectController from "../controllers/project";
+import categoryController from "../controllers/category";
 
 const router = express.Router();
 
@@ -9,9 +9,9 @@ const router = express.Router();
 
 router
   .route("/")
-  .post(projectController.addProject) 
-  .get(checkAuth,projectController.allProjects);
+  .post(categoryController.addCategory) 
+  .get(checkAuth, categoryController.allCategories);
 
-router.route("/:id").get(projectController.getProjectById);
+router.route("/:id").get(categoryController.getCategoryById);
 
 export default router;

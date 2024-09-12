@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 const router = express.Router();
 
 import userRoutes from "./routes/user.routes";
-import projectRoutes from "./routes/project.routes";
+import categoryRoutes from "./routes/category.routes";
 
 app.use(cors());
 app.use(express.json());
@@ -29,7 +29,7 @@ try {
 }
 
 router.use("/user", userRoutes);
-router.use("/project", projectRoutes);
+router.use("/category", categoryRoutes);
 
 app.use("/api", router);
 

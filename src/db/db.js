@@ -24,23 +24,23 @@ class Db {
       throw error;
     }
   }
-  static async addProject(model, data) {
+  static async addCategory(model, data) {
     try {
-      const newProject = await model({ ...data });
-      return newProject.save();
+      const newCategory = await model({ ...data });
+      return newCategory.save();
     } catch (error) {
       throw error;
     }
   }
-  static async getAllProjects(model) {
+  static async getAllCategories(model) {
     try {
-      const allProjects = await model.find({});
-      return allProjects;
+      const allCategories = await model.find({});
+      return allCategories;
     } catch (error) {
       throw error;
     }
   }
-  static async getProjectById(model, id) {
+  static async getCategoryById(model, id) {
     try {
       const project = await model.findById(id);
       return project;
