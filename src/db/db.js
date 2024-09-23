@@ -48,6 +48,30 @@ class Db {
       throw error;
     }
   }
+  static async addPriority(model, data) {
+    try {
+      const newPriority = await model({ ...data });
+      return newPriority.save();
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async getAllPriorities(model) {
+    try {
+      const allPriorities = await model.find({});
+      return allPriorities;
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async getPriorityById(model, id) {
+    try {
+      const priority = await model.findById(id);
+      return priority;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default Db;
