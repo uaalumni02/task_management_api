@@ -16,10 +16,9 @@ const TaskInformationSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "Category",
   },
-  //---priority will be yes or no --- need to change thins....make a priority model that takes yes or know and put the id here like userName
   priority: {
-    type: String,
-    required: [true, "priority is required"]
+    type: Schema.Types.ObjectId,
+    ref: "Priority",
   },
   __v: {
     type: Number,
