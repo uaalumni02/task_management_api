@@ -6,7 +6,8 @@ const schema = Joi.object({
   userName: Joi.objectId(),
   dueDate: Joi.number().required(),
   category: Joi.objectId(),
-  priority: Joi.objectId()
+  priority: Joi.objectId(),
+  status: Joi.objectId(),
 });
 
 export default schema;

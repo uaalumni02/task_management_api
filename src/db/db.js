@@ -84,7 +84,7 @@ class Db {
     try {
       const allTasks = await model
         .find({})
-        .populate("userName category priority");
+        .populate("userName category priority status");
       return allTasks;
     } catch (error) {
       throw error;
@@ -94,8 +94,32 @@ class Db {
     try {
       const task = await model
         .findById(id)
-        .populate("userName category priority");
+        .populate("userName category priority status");
       return task;
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async addStatus(model, data) {
+    try {
+      const newStatus = await model({ ...data });
+      return newStatus.save();
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async getAllStatuses(model) {
+    try {
+      const allStatuses = await model.find({});
+      return allStatuses;
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async getStatusById(model, id) {
+    try {
+      const status = await model.findById(id);
+      return status;
     } catch (error) {
       throw error;
     }

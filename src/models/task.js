@@ -6,7 +6,7 @@ const { Schema } = mongoose;
 const TaskInformationSchema = mongoose.Schema({
   task: {
     type: String,
-    required: [true, "task is required"]
+    required: [true, "task is required"],
   },
   userName: {
     type: Schema.Types.ObjectId,
@@ -23,6 +23,10 @@ const TaskInformationSchema = mongoose.Schema({
   priority: {
     type: Schema.Types.ObjectId,
     ref: "Priority",
+  },
+  status: {
+    type: Schema.Types.ObjectId,
+    ref: "Status",
   },
   __v: {
     type: Number,
