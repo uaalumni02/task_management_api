@@ -80,6 +80,26 @@ class Db {
       throw error;
     }
   }
+  static async getAllTasks(model) {
+    try {
+      const allTasks = await model
+        .find({})
+        .populate("userName category priority");
+      return allTasks;
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async getTaskById(model, id) {
+    try {
+      const task = await model
+        .findById(id)
+        .populate("userName category priority");
+      return task;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default Db;

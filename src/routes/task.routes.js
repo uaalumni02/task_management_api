@@ -7,9 +7,11 @@ const router = express.Router();
 
 //-----need to add check auth ---- figure out how to work with the cookie
 
-router.route("/").post(checkAuth, taskController.addTask);
-//   .get(checkAuth, priorityController.allPriorities);
+router
+  .route("/")
+  .post(checkAuth, taskController.addTask)
+  .get(checkAuth, taskController.allTasks);
 
-// router.route("/:id").get(priorityController.getPriorityById);
+router.route("/:id").get(taskController.getTaskById);
 
 export default router;

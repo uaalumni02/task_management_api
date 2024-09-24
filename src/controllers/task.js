@@ -20,8 +20,24 @@ class TaskData {
         return Response.responseOkCreated(res, TaskName);
       }
     } catch (error) {
-      console.log(error)
       return Response.responseServerError(res);
+    }
+  }
+  static async allTasks(req, res) {
+    try {
+      const allTasks = await Db.getAllTasks(Task);
+      return Response.responseOk(res, allTasks);
+    } catch (error) {
+      return Response.responseNotFound(res);
+    }
+  }
+  static async getTaskById(req, res) {
+    const { id } = req.params;
+    try {
+      const taskById = await Db.getTaskById(Task, id);
+      return Response.responseOk(res, taskById);
+    } catch (error) {
+      return Response.responseNotFound(res);
     }
   }
 }
