@@ -4,6 +4,10 @@ const { Schema } = mongoose;
 // import isValidTask from "../helpers/model/task";
 
 const TaskInformationSchema = mongoose.Schema({
+  task: {
+    type: String,
+    required: [true, "task is required"]
+  },
   userName: {
     type: Schema.Types.ObjectId,
     ref: "User",

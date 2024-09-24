@@ -72,6 +72,14 @@ class Db {
       throw error;
     }
   }
+  static async addTask(model, data) {
+    try {
+      const newTask = await model({ ...data });
+      return newTask.save();
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default Db;
