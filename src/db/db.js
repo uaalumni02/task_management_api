@@ -16,6 +16,7 @@ class Db {
       throw error;
     }
   }
+
   static async getAllUsers(model) {
     try {
       const allUsers = await model.find({});
@@ -24,6 +25,7 @@ class Db {
       throw error;
     }
   }
+
   static async addCategory(model, data) {
     try {
       const newCategory = await model({ ...data });
@@ -32,6 +34,7 @@ class Db {
       throw error;
     }
   }
+
   static async getAllCategories(model) {
     try {
       const allCategories = await model.find({});
@@ -40,6 +43,7 @@ class Db {
       throw error;
     }
   }
+
   static async getCategoryById(model, id) {
     try {
       const project = await model.findById(id);
@@ -48,6 +52,7 @@ class Db {
       throw error;
     }
   }
+
   static async addPriority(model, data) {
     try {
       const newPriority = await model({ ...data });
@@ -56,6 +61,7 @@ class Db {
       throw error;
     }
   }
+
   static async getAllPriorities(model) {
     try {
       const allPriorities = await model.find({});
@@ -64,6 +70,7 @@ class Db {
       throw error;
     }
   }
+
   static async getPriorityById(model, id) {
     try {
       const priority = await model.findById(id);
@@ -72,6 +79,7 @@ class Db {
       throw error;
     }
   }
+
   static async addTask(model, data) {
     try {
       const newTask = await model({ ...data });
@@ -80,6 +88,7 @@ class Db {
       throw error;
     }
   }
+
   static async getAllTasks(model) {
     try {
       const allTasks = await model
@@ -90,6 +99,7 @@ class Db {
       throw error;
     }
   }
+
   static async getTaskById(model, id) {
     try {
       const task = await model
@@ -100,6 +110,7 @@ class Db {
       throw error;
     }
   }
+
   static async addStatus(model, data) {
     try {
       const newStatus = await model({ ...data });
@@ -108,6 +119,7 @@ class Db {
       throw error;
     }
   }
+
   static async getAllStatuses(model) {
     try {
       const allStatuses = await model.find({});
@@ -116,10 +128,23 @@ class Db {
       throw error;
     }
   }
+
   static async getStatusById(model, id) {
     try {
       const status = await model.findById(id);
       return status;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // New method: Get tasks by date
+  static async getTasksByDate(model, taskDate) {
+    try {
+      const tasks = await model
+        .find({ dueDate: taskDate })
+        .populate("userName category priority status");
+      return tasks;
     } catch (error) {
       throw error;
     }
