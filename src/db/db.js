@@ -149,6 +149,17 @@ class Db {
       throw error;
     }
   }
+  static async updateTaskData(model, taskId, taskData) {
+    try {
+      const filter = { _id: taskId };
+      const updatedTask = await model.findOneAndUpdate(filter, taskData, {
+        new: true,
+      });
+      return updatedTask;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default Db;

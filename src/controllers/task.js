@@ -80,6 +80,39 @@ class TaskData {
       return Response.responseServerError(res);
     }
   }
+  static async updateTask(req, res) {
+    const taskId = req.params.id;
+    const taskData = { ...req.body };
+
+    // Convert dueDate to a timestamp
+    let taskTimestamp = moment(taskData.dueDate, "MM-DD-YYYY").unix();
+    taskData.dueDate = taskTimestamp;
+
+    const { task, userName, dueDate, category, priority, status } = req.body;
+    const updateTask = {
+      task,
+      userName,
+      dueDate: taskTimestamp,
+      category,
+      priority,
+      status,
+    };
+    try {
+      const result = await validator.validateAsync(updateTask);
+      if (!result.error) {
+        const taskToUpdate = await Db.updateTaskData(
+          Task,
+
+          taskId,
+          taskData
+        );
+        return Response.responseOk(res, taskToUpdate);
+      }
+    } catch (error) {
+      console.log(error);
+      return Response.responseServerError(res);
+    }
+  }
 }
 
 export default TaskData;
