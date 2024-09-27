@@ -11,6 +11,7 @@ router
 
 router
   .route("/:id")
+  .delete(checkAuth, taskController.deleteTask)
   .get(checkAuth, taskController.getTaskById)
   .patch(checkAuth, taskController.updateTask);
 

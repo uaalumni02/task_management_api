@@ -160,6 +160,14 @@ class Db {
       throw error;
     }
   }
+  static async removeTask(model, id) {
+    try {
+      const deleteTask = await model.findOneAndDelete({ _id: id });
+      return {};
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default Db;

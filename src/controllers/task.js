@@ -113,6 +113,15 @@ class TaskData {
       return Response.responseServerError(res);
     }
   }
+  static async deleteTask(req, res) {
+    const { id } = req.params;
+    try {
+      const taskToDelete = await Db.removeTask(Task, id);
+      return Response.responseOk(res, taskToDelete);
+    } catch (error) {
+      return Response.responseServerError(res);
+    }
+  }
 }
 
 export default TaskData;
