@@ -68,6 +68,19 @@ const responseOkTokenCreated = (res, data) => {
   });
 };
 
+const responseTokenExpired = (res) => {
+  return res.status(401).json({
+    success: false,
+    message: "Reset token is not valid or has expired",
+  });
+};
+const responseEmailNotFound = (res) => {
+  return res.status(404).json({
+    success: false,
+    message: "Will send reset link to email",
+  });
+};
+
 export {
   responseBadRquest,
   responseNotFound,
@@ -79,4 +92,6 @@ export {
   responseServerError,
   responseValidationError,
   responseOkTokenCreated,
+  responseTokenExpired,
+  responseEmailNotFound,
 };

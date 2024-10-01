@@ -2,8 +2,12 @@ import Db from "../db/db";
 import User from "../models/user";
 import Token from "../helpers/jwt/token";
 import bcrypt from "../helpers/bcrypt/bcrypt";
+import crypto from "crypto";
+
 import validator from "../validator/user";
 import * as Response from "../helpers/response/response";
+
+import sendHandler from "../helpers/email/mailer";
 
 class UserData {
   static async addUser(req, res) {
@@ -85,6 +89,29 @@ class UserData {
       return Response.responseNotFound(res);
     }
   }
+
+  //look at reset url in handler helper
+  static async userPasswordReset(req, res) {
+    const { email } = req.body;
+    let reset_token = crypto.randomBytes(20).toString("hex");
+    try {
+      const userToReset = await Db.findUserReset(User, email);
+      if (userToReset == null) {
+        return Response.responseEmailNotFound(res);
+      }
+      const reset = await Db.saveResetString(
+        User,
+        userToReset._id,
+        reset_token,
+        moment().unix()
+      );
+      sendHandler(reset_token);
+      return Response.responseOkTokenCreated(res);
+    } catch (error) {
+      return Response.responseServerError(res);
+    }
+  }
+
 }
 
 export default UserData;

@@ -168,6 +168,29 @@ class Db {
       throw error;
     }
   }
+  static async findUserReset(model, email) {
+    try {
+      const user = await model.findOne({ email });
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async saveResetString(model, userToReset, reset_token, currentTime) {
+    try {
+      const filter = { _id: userToReset._id };
+      const addResetString = await model.findOneAndUpdate(
+        filter,
+        { reset_token, currentTime },
+        {
+          new: true,
+        }
+      );
+      return addResetString;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default Db;
