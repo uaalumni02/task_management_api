@@ -13,6 +13,10 @@ const UserSchema = Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+  },
 
   role: { type: String, enum: ["pending", "standard", "admin"] },
   reset_token: { type: String },

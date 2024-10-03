@@ -3,6 +3,7 @@ import User from "../models/user";
 import Token from "../helpers/jwt/token";
 import bcrypt from "../helpers/bcrypt/bcrypt";
 import crypto from "crypto";
+import moment from "moment";
 
 import validator from "../validator/user";
 import * as Response from "../helpers/response/response";
@@ -90,7 +91,7 @@ class UserData {
     }
   }
 
-  //look at reset url in handler helper
+  //look at reset url in handler helper------------------------------------
   static async userPasswordReset(req, res) {
     const { email } = req.body;
     let reset_token = crypto.randomBytes(20).toString("hex");
@@ -108,6 +109,7 @@ class UserData {
       sendHandler(reset_token);
       return Response.responseOkTokenCreated(res);
     } catch (error) {
+      console.log(error)
       return Response.responseServerError(res);
     }
   }
