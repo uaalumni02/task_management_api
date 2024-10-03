@@ -16,7 +16,8 @@ import categoryRoutes from "./routes/category.routes";
 import priorityRoutes from "./routes/priority.routes";
 import taskRoutes from "./routes/task.routes";
 import statusRoutes from "./routes/status.routes";
-import userResetRoutes from "./routes/userReset.route";
+import userResetRoutes from "./routes/userReset.routes";
+import updatePasswordRoutes from "./routes/updatePassword.routes";
 
 app.use(cors());
 app.use(express.json());
@@ -34,6 +35,7 @@ try {
 
 router.use("/user", userRoutes);
 router.use("/reset", userResetRoutes);
+router.use("/updatePassword", updatePasswordRoutes);
 router.use("/category", categoryRoutes);
 router.use("/priority", priorityRoutes);
 router.use("/task", taskRoutes);

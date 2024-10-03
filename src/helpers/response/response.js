@@ -81,6 +81,28 @@ const responseEmailNotFound = (res) => {
   });
 };
 
+const responseInvalidConfirmation = (res) => {
+  return res.status(401).json({
+      success: false,
+      message: 'Passwords do not match ',
+  });
+}
+const responseUserNotFound = (res) => {
+  return res.status(404).json({
+      success: false,
+      message: 'User Not Found'
+  });
+}
+
+const responseOkUpdated = (res, data) => {
+  return res.status(200).json({
+      success: true,
+      data, 
+      message: "Password reset successful, proceed to login",
+  });
+}
+
+
 export {
   responseBadRquest,
   responseNotFound,
@@ -94,4 +116,7 @@ export {
   responseOkTokenCreated,
   responseTokenExpired,
   responseEmailNotFound,
+  responseInvalidConfirmation,
+  responseUserNotFound,
+  responseOkUpdated
 };
