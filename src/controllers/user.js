@@ -65,20 +65,20 @@ class UserData {
             userName: user.userName,
             userId: user._id,
           });
+
+          // Setting the token in a cookie
           res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production", // Use true in production
+            secure: process.env.NODE_ENV === "production",
             sameSite: "strict",
           });
-          const userData = { user };
-          return Response.responseOk(res, userData);
+
+          // Optionally send the token in the response body
+          return res.status(200).json({ token, user });
         }
         return Response.responseBadAuth(res);
-      } else {
-        return Response.responseValidationError(res);
       }
     } catch (error) {
-      console.log(error);
       return Response.responseServerError(res);
     }
   }
@@ -97,7 +97,7 @@ class UserData {
   static async userPasswordReset(req, res) {
     const { email } = req.body;
     let reset_token = crypto.randomBytes(20).toString("hex");
-    console.log(reset_token)
+    console.log(reset_token);
     try {
       const userToReset = await Db.findUserReset(User, email);
       if (userToReset == null) {
@@ -121,7 +121,6 @@ class UserData {
     const { password } = req.body;
     try {
       const { error } = validator.validate(req.body);
-      console.log(error)
       if (error) {
         return Response.responseInvalidConfirmation(res);
       }
