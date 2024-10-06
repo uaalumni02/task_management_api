@@ -121,6 +121,7 @@ class UserData {
     const { password } = req.body;
     try {
       const { error } = validator.validate(req.body);
+      console.log(error)
       if (error) {
         return Response.responseInvalidConfirmation(res);
       }

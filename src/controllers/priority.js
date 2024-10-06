@@ -14,6 +14,7 @@ class PriorityData {
         return Response.responseOkCreated(res, PriorityName);
       }
     } catch (error) {
+      console.log(error)
       return Response.responseServerError(res);
     }
   }
