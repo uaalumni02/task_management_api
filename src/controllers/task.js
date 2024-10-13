@@ -44,6 +44,16 @@ class TaskData {
     }
   }
 
+  static async getTaskByUser(req, res) {
+    const { userName } = req.params;
+    try {
+      const taskByUserName = await Db.getTaskByUserName(Task, userName);
+      return Response.responseOk(res, taskByUserName);
+    } catch (error) {
+      return Response.responseNotFound(res);
+    }
+  }
+
   // New method: Get tasks by date and check if it's upcoming or past due
   static async getTaskByDate(req, res) {
     const { date } = req.params; // Expecting date in 'MM-DD-YYYY' format
@@ -109,7 +119,6 @@ class TaskData {
         return Response.responseOk(res, taskToUpdate);
       }
     } catch (error) {
-      console.log(error);
       return Response.responseServerError(res);
     }
   }

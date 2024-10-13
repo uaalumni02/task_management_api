@@ -11,6 +11,7 @@ const port = process.env.PORT || 3000;
 
 const router = express.Router();
 
+import taskByUserRoutes from "./routes/taskByUser.routes"
 import userRoutes from "./routes/user.routes";
 import categoryRoutes from "./routes/category.routes";
 import priorityRoutes from "./routes/priority.routes";
@@ -40,6 +41,7 @@ router.use("/category", categoryRoutes);
 router.use("/priority", priorityRoutes);
 router.use("/task", taskRoutes);
 router.use("/status", statusRoutes);
+router.use("/task_by_user", taskByUserRoutes)
 
 app.use("/api", router);
 

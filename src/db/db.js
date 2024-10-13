@@ -111,6 +111,18 @@ class Db {
     }
   }
 
+  static async getTaskByUserName(model, userName) {
+    try {
+      const getTaskByUser = await model
+        .find({ userName })
+        .populate("userName category priority status")
+        .exec();
+      return getTaskByUser;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async addStatus(model, data) {
     try {
       const newStatus = await model({ ...data });
