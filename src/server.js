@@ -20,7 +20,14 @@ import statusRoutes from "./routes/status.routes";
 import userResetRoutes from "./routes/userReset.routes";
 import updatePasswordRoutes from "./routes/updatePassword.routes";
 
-app.use(cors());
+// app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:3001', // Front-end origin
+  credentials: true, // Allow cookies and credentials
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
