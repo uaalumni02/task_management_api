@@ -66,7 +66,6 @@ class UserData {
           userName: user.userName,
           userId: user._id,
         });
-        console.log("Generated token:", token);
   
         // Set the token in the cookie
         res.cookie("token", token, {
@@ -89,7 +88,6 @@ class UserData {
 
   static async getAllUsers(req, res) {
     try {
-      console.log("Authenticated user:", req.user);
       const allUsers = await Db.getAllUsers(User);
       return Response.responseOk(res, allUsers);
     } catch (error) {

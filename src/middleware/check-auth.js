@@ -3,7 +3,6 @@ import * as Response from "../helpers/response/response";
 
 const authChecker = (req, res, next) => {
   const token = req.cookies.token;
-  console.log('Token from cookies:', token); // Add this line to check if token is available
 
   if (!token) {
     return Response.responseBadAuth(res);
