@@ -85,7 +85,6 @@ class UserData {
     }
   }
   
-
   static async getAllUsers(req, res) {
     try {
       const allUsers = await Db.getAllUsers(User);
