@@ -54,34 +54,38 @@ class UserData {
       if (!result.error) {
         const user = await Db.findUser(User, userName);
         if (user == null) {
-          return Response.responseBadAuth(res, user);
+          return Response.responseBadAuth(res, "Invalid username or password");
         }
-        const isSamePassword = await bcrypt.comparePassword(
-          password,
-          user.password
-        );
-        if (isSamePassword) {
-          const token = Token.sign({
-            userName: user.userName,
-            userId: user._id,
-          });
-
-          // Setting the token in a cookie
-          res.cookie("token", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "lax",
-          });
-
-          // Optionally send the token in the response body
-          return res.status(200).json({ token, user });
+        
+        const isSamePassword = await bcrypt.comparePassword(password, user.password);
+        if (!isSamePassword) {
+          return Response.responseBadAuth(res, "Invalid username or password");
         }
-        return Response.responseBadAuth(res);
+  
+        const token = Token.sign({
+          userName: user.userName,
+          userId: user._id,
+        });
+        console.log("Generated token:", token);
+  
+        // Set the token in the cookie
+        res.cookie("token", token, {
+          httpOnly: true,  // This ensures the cookie can't be accessed via JavaScript
+          secure: process.env.NODE_ENV === "production",  // Only secure in production
+          sameSite: "lax",  // Adjust sameSite based on your needs
+        });
+  
+        // Optionally send the token in the response body
+        return res.status(200).json({ token, user });
+      } else {
+        return Response.responseInvalidInput(res);
       }
     } catch (error) {
+      console.error("Error during login:", error);
       return Response.responseServerError(res);
     }
   }
+  
 
   static async getAllUsers(req, res) {
     try {
