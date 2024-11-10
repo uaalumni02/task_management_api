@@ -33,13 +33,19 @@ class UserData {
           if (role === "standard" || role === "admin") {
             token = Token.sign({ userName, userId, role });
           }
+
           res.cookie("token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production", // Use true in production
-            sameSite: "strict",
+            sameSite: "lax",
           });
-          const userData = { userName, userId, role };
-          return Response.responseOkUserCreated(res, userData);
+
+          const userData = { userName, userId, role, token };
+
+          // Sending the token in the response body along with userData
+          return res
+            .status(201)
+            .json({ message: "User created successfully", userData });
         }
       }
     } catch (error) {
@@ -56,24 +62,27 @@ class UserData {
         if (user == null) {
           return Response.responseBadAuth(res, "Invalid username or password");
         }
-        
-        const isSamePassword = await bcrypt.comparePassword(password, user.password);
+
+        const isSamePassword = await bcrypt.comparePassword(
+          password,
+          user.password
+        );
         if (!isSamePassword) {
           return Response.responseBadAuth(res, "Invalid username or password");
         }
-  
+
         const token = Token.sign({
           userName: user.userName,
           userId: user._id,
         });
-  
+
         // Set the token in the cookie
         res.cookie("token", token, {
-          httpOnly: true,  // This ensures the cookie can't be accessed via JavaScript
-          secure: process.env.NODE_ENV === "production",  // Only secure in production
-          sameSite: "lax",  // Adjust sameSite based on your needs
+          httpOnly: true, // This ensures the cookie can't be accessed via JavaScript
+          secure: process.env.NODE_ENV === "production", // Only secure in production
+          sameSite: "lax", // Adjust sameSite based on your needs
         });
-  
+
         // Optionally send the token in the response body
         return res.status(200).json({ token, user });
       } else {
@@ -84,7 +93,7 @@ class UserData {
       return Response.responseServerError(res);
     }
   }
-  
+
   static async getAllUsers(req, res) {
     try {
       const allUsers = await Db.getAllUsers(User);
@@ -122,7 +131,7 @@ class UserData {
     const { password } = req.body;
     try {
       const { error } = validator.validate(req.body);
-      console.log(error)
+      console.log(error);
       if (error) {
         return Response.responseInvalidConfirmation(res);
       }

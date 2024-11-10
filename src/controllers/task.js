@@ -119,6 +119,7 @@ class TaskData {
         return Response.responseOk(res, taskToUpdate);
       }
     } catch (error) {
+      console.log(error)
       return Response.responseServerError(res);
     }
   }

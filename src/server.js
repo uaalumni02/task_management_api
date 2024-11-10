@@ -20,7 +20,6 @@ import statusRoutes from "./routes/status.routes";
 import userResetRoutes from "./routes/userReset.routes";
 import updatePasswordRoutes from "./routes/updatePassword.routes";
 
-// app.use(cors());
 const corsOptions = {
   origin: 'http://localhost:3001', // Front-end origin
   credentials: true, // Allow cookies and credentials
