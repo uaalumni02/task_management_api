@@ -30,9 +30,8 @@ class UserData {
             role,
           } = await Db.saveUser(User, newUser);
           let token = "";
-          if (role === "standard" || role === "admin") {
-            token = Token.sign({ userName, userId, role });
-          }
+
+          token = Token.sign({ userName, userId, role });
 
           res.cookie("token", token, {
             httpOnly: true,
