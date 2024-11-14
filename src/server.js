@@ -21,7 +21,7 @@ import userResetRoutes from "./routes/userReset.routes";
 import updatePasswordRoutes from "./routes/updatePassword.routes";
 
 const corsOptions = {
-  origin: 'http://localhost:3001', // Front-end origin
+  origin: 'https://task-management-front-vb8t.onrender.com', // Front-end origin
   credentials: true, // Allow cookies and credentials
 };
 
