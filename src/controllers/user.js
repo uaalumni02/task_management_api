@@ -34,7 +34,7 @@ class UserData {
           token = Token.sign({ userName, userId, role });
 
           res.cookie("token", token, {
-            httpOnly: true,
+            // httpOnly: true,
             secure: process.env.NODE_ENV === "production", // Use true in production
             sameSite: "lax",
           });
@@ -77,7 +77,7 @@ class UserData {
 
         // Set the token in the cookie
         res.cookie("token", token, {
-          httpOnly: true, // This ensures the cookie can't be accessed via JavaScript
+          // httpOnly: true, // This ensures the cookie can't be accessed via JavaScript
           secure: process.env.NODE_ENV === "production", // Only secure in production
           sameSite: "lax", // Adjust sameSite based on your needs
         });
